@@ -16,6 +16,7 @@ public class Labo2Task01 {
 //            続くまで取得
             while(scanner_file.hasNextLine()){
 //                一行ずつ取得
+                String line = scanner_file.nextLine();
                 String date = scanner_file.next();
                 int amount = scanner_file.nextInt();
 
@@ -42,8 +43,8 @@ public class Labo2Task01 {
 //    コンソールに入力したものを返す
     public static String getFileName(){
         Scanner scanner = new Scanner(System.in);
-        String str = scanner.nextLine();
-        return str;
+        String string = scanner.nextLine();
+        return string;
     }
 //
     static class SnowRecord{
