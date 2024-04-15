@@ -12,6 +12,7 @@ public class Labo2Task02 {
         double imag1 = scanner.nextDouble();
         z1 = new complex(real1, imag1);
         System.out.println("Z1 = "+z1);
+
         System.out.println("Please input real and imaginary part of the second complex number. ex:2.0 3.0");
         double real2 = scanner.nextDouble();
         double imag2 = scanner.nextDouble();
@@ -55,7 +56,7 @@ public class Labo2Task02 {
         }
 //        割り算
         public complex div(complex other){
-            return new complex((real*other.real + imag*other.imag)/(other.real*other.real + other.imag*other.imag), (imag*other.real -real*other.imag)/(other.real*other.real + other.imag*other.imag));
+            return new complex((real*other.real + imag*other.imag)/(abs()*abs()), (imag*other.real -real*other.imag)/(abs()*abs()));
         }
     }
 }
