@@ -34,6 +34,7 @@ public class Labo2Task03 {
             double distance = histogram1.distance(histogram2);
             System.out.println("Distance: " + distance);
 
+//            System.out.println();
         }catch (Exception e){
             System.out.println(e);
         }
@@ -72,13 +73,13 @@ public class Labo2Task03 {
 
             double distance = 0;
 
-            for (int i = 0; i < counts.length; i++){
+            for (int i = 0; i < 64; i++){
                 p[i] = counts[i] / sumcounts1;
                 q[i] = other.counts[i] / sumcounts2;
 
 
-                distance =+ Math.abs(p[i] - q[i]);
-
+                distance += Math.abs(p[i] - q[i]);
+//                distance += p[i];
             }
             return distance;
         }
