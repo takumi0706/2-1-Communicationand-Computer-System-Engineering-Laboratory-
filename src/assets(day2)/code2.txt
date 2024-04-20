@@ -1,0 +1,13 @@
+set(x10, plus(plus(1,2),3))
+set(x9,mod(5,2))
+x10
+x9
+mul(3, div(6,2))
+set(x0,plus(0,1))
+set(x0,plus(x0,1))
+set(x0,plus(x0,1))
+set(x0,plus(x0,1))
+set(x0,plus(x0,1))
+set(x0,plus(x0,1))
+set(x0,plus(x0,1))
+x0

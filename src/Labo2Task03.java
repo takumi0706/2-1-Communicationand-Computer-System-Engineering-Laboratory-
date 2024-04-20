@@ -24,7 +24,7 @@ public class Labo2Task03 {
             int width2 = image2.getWidth();
             int height2 = image2.getHeight();
             System.out.println("("+ width2 + "," + height2 + ")");
-            //        TODO: 画像の距離を出す
+
             ImageHistogram histogram1 = new ImageHistogram();
             ImageHistogram histogram2 = new ImageHistogram();
 
