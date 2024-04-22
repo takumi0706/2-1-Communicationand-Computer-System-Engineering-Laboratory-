@@ -1,37 +1,35 @@
+
 import java.io.File;
 import java.util.Scanner;
 
-public class Labo2Task04 {
+public class Labo2Task04_copy {
+
     public static void main(String[] args) {
-//        ファイルネームを入力
-        System.out.println("ファイルネームを入力してください");
 
-//        ファイルネームを取得
+//        Node root = new Node();
+//        root.makeTree("plus(mul(4,5),minus(2,div(3,2)))");
+//        System.out.println(root.caluculate());
+
+//        Node root = new Node();
+//        root.makeTree("set(x2,2)");
+//        System.out.println(root.caluculate());
+
+        System.out.println("Please input file name.");
         Scanner scanner = new Scanner(System.in);
-
-//        取得したファイルネームを変数に代入
         String fileName = scanner.nextLine();
 
-//        ファイルがあるか確認
+//            ファイルがあるか確認
         try(Scanner scanner_file = new Scanner(new File(fileName))){
-//         ファイルの中身を取得
+//            ファイルの中身を取得
             while(scanner_file.hasNextLine()){
-            String statement = scanner_file.nextLine();
-            Node root = new Node();
-            root.makeTree(statement);
-            System.out.println(root.calculate());
+                String statement = scanner_file.nextLine();
+                Node root = new Node();
+                root.makeTree(statement);
+                System.out.println(root.caluculate());
             }
         }catch (Exception e){
             System.out.println(e);
         }
-
-//
-//        Node root = new Node();
-//        root.makeTree("set(x2,2)");
-//        System.out.println(root.calculate());
-
-//        String test = "0123(456";
-//        System.out.println(test.indexOf("("));
     }
 
     static class Node {
@@ -43,14 +41,14 @@ public class Labo2Task04 {
             int sindex = statement.indexOf("(");
             int eindex = statement.lastIndexOf(")");
 
-//            System.out.println(sindex+"+"+eindex);
+//            System.out.println(sindex + "+" + eindex);
+
             int mindex = 0;
 
             if (sindex == -1 && eindex == -1) {
                 function = statement;
                 left = null;
                 right = null;
-
             } else {
                 int counts = 0;
                 for (int i = 0; i < statement.length(); i++) {
@@ -64,44 +62,50 @@ public class Labo2Task04 {
                     }
                 }
 
-                function = statement.substring(0, sindex);
+                function = statement.substring(0 ,sindex);
                 function = function.trim();
 
                 left = new Node();
                 right = new Node();
+
                 left.makeTree(statement.substring(sindex + 1, mindex));
                 right.makeTree(statement.substring(mindex + 1, eindex));
             }
         }
 
-        public int calculate() {
-            if (left == null && right == null) {
+        public int caluculate(){
+            if(left == null && right == null){
                 if(function.startsWith("x")){
                     return x[Integer.parseInt(function.substring(1))];
                 }else {
                     return Integer.parseInt(function);
                 }
-            } else {
-                int leftValue = left.calculate();
-                int rightValue = right.calculate();
+            }else{
+                int leftValue = left.caluculate();
+                int rightValue = right.caluculate();
 
-                if (function.equals("plus")) {
-                    return leftValue + rightValue;
-                } else if (function.equals("minus")) {
-                    return leftValue - rightValue;
-                } else if (function.equals("mul")) {
+                if(function.equals("plus")){
+                    return leftValue+ rightValue;
+
+                }else if(function.equals("minus")){
+                    return leftValue- rightValue;
+
+                }else if(function.equals("mul")){
                     return leftValue * rightValue;
-                } else if (function.equals("div")) {
+
+                }else if(function.equals("div")){
                     return leftValue / rightValue;
-                } else if (function.equals("mod")) {
+
+                }else  if(function.equals("mod")){
                     return leftValue % rightValue;
-                } else if (function.equals("set")) {
-//              leftValueにはx(数字)が入ってる。leftValueをｘを取り除いて数字だけにして配列用の数字にしなければならない。
-                    return x[Integer.parseInt(left.function.substring(1))]=rightValue;
+
+                }else if (function.equals("set")){
+                    return x[Integer.parseInt(left.function.substring(1))] = rightValue;
                 }
             }
             return 0;
         }
+
         public static int[] x = new int[10000];
     }
 }
