@@ -1,0 +1,13 @@
+set($i, plus(plus(1,2),3))
+set($j,mod(5,2))
+$i
+$j
+mul(3, div(6,2))
+set($x,plus(0,1))
+set($x,plus($x,1))
+set($x,plus($x,1))
+set($x,plus($x,1))
+set($x,plus($x,1))
+set($x,plus($x,1))
+set($x,plus($x,1))
+$x

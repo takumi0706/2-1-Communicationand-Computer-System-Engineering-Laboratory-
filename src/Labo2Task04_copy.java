@@ -3,34 +3,26 @@ import java.io.File;
 import java.util.Scanner;
 
 public class Labo2Task04_copy {
-
     public static void main(String[] args) {
+        if (args.length < 1) {
+        System.out.println("Please provide a file name as a command line argument.");
+        return;
+        }
 
-//        Node root = new Node();
-//        root.makeTree("plus(mul(4,5),minus(2,div(3,2)))");
-//        System.out.println(root.caluculate());
+        String fileName = args[0];
 
-//        Node root = new Node();
-//        root.makeTree("set(x2,2)");
-//        System.out.println(root.caluculate());
-
-        System.out.println("Please input file name.");
-        Scanner scanner = new Scanner(System.in);
-        String fileName = scanner.nextLine();
-
-//            ファイルがあるか確認
-        try(Scanner scanner_file = new Scanner(new File(fileName))){
-//            ファイルの中身を取得
-            while(scanner_file.hasNextLine()){
-                String statement = scanner_file.nextLine();
-                Node root = new Node();
-                root.makeTree(statement);
-                System.out.println(root.caluculate());
+        try (Scanner scanner_file = new Scanner(new File(fileName))) {
+            while (scanner_file.hasNextLine()) {
+            String statement = scanner_file.nextLine();
+            Node root = new Node();
+            root.makeTree(statement);
+            System.out.println(root.calculate());
             }
-        }catch (Exception e){
-            System.out.println(e);
+        } catch (Exception e) {
+        System.out.println(e);
         }
     }
+
 
     static class Node {
         Node left;
@@ -73,7 +65,7 @@ public class Labo2Task04_copy {
             }
         }
 
-        public int caluculate(){
+        public int calculate(){
             if(left == null && right == null){
                 if(function.startsWith("x")){
                     return x[Integer.parseInt(function.substring(1))];
@@ -81,8 +73,8 @@ public class Labo2Task04_copy {
                     return Integer.parseInt(function);
                 }
             }else{
-                int leftValue = left.caluculate();
-                int rightValue = right.caluculate();
+                int leftValue = left.calculate();
+                int rightValue = right.calculate();
 
                 if(function.equals("plus")){
                     return leftValue+ rightValue;
