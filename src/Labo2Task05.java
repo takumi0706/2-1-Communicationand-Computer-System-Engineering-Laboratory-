@@ -10,25 +10,25 @@ public class Labo2Task05 {
         String fileName = args[0];
 
 //            ファイルがあるか確認
-        try(Scanner scanner_file = new Scanner(new File(fileName))){
+        try (Scanner scanner_file = new Scanner(new File(fileName))) {
             Node root = new Node();
             //            ファイルの中身を取得
-            while(scanner_file.hasNextLine()){
+            while (scanner_file.hasNextLine()) {
                 String statement = scanner_file.nextLine();
                 root.makeTree(statement);
                 root.calculate();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
-
-    static class Node {
+}
+    class Node {
         Node left;
         Node right;
         String function;
 
-        private void makeTree(String statement) {
+        public void makeTree(String statement) {
             int sindex = statement.indexOf("(");
             int eindex = statement.lastIndexOf(")");
 
@@ -62,18 +62,21 @@ public class Labo2Task05 {
             }
         }
 
-        private MyVal calculate() {
-
-            MyVal leftVal = left.calculate();
-            MyVal rightVal = right.calculate();
-
+        public MyVal calculate() {
             if (left == null || right == null) {
                 if (function.startsWith("$")) {
                         return hm.get(function);
                 } else {
                     return MyVal.readVal(function);
                 }
-            } else {
+            }else {
+                if(function.equals("set")){
+                    hm.put(left.function,right.calculate());
+                    return right.calculate();
+                }
+                MyVal leftVal = left.calculate();
+                MyVal rightVal = right.calculate();
+
                 if (leftVal instanceof MyDouble || rightVal instanceof MyDouble) {
                     double leftValue = leftVal.toDouble();
                     double rightValue = rightVal.toDouble();
@@ -89,12 +92,18 @@ public class Labo2Task05 {
 
                     } else if (function.equals("div")) {
                         return new MyDouble(leftValue / rightValue);
-
-                    }else if (function.equals("set")) {
-                        hm.put(left.function, new MyDouble(rightValue));
-                        return new MyDouble(rightValue);
+                    }else if (function.equals("print")) {
+                        System.out.println(leftVal.toString());
+                        return leftVal;
+                    }else if(function.equals("mod")) {
+                        return new MyInt((int)(leftValue % rightValue));
+                    }else if(function.equals("set")){
+                        hm.put(left.function,rightVal);
+                        return rightVal;
+                    }else if(function.equals("join")){
+                        return new MyString(""+leftValue + rightValue);
                     }
-                }else if (leftVal instanceof MyInt || rightVal instanceof MyInt) {
+                }else if (leftVal instanceof MyInt && rightVal instanceof MyInt) {
                     int leftValue = leftVal.toInt();
                     int rightValue = rightVal.toInt();
 
@@ -102,28 +111,35 @@ public class Labo2Task05 {
                         return new MyInt(leftValue + rightValue);
 
                     } else if (function.equals("minus")) {
-                        return new MyInt (leftValue - rightValue);
+                        return new MyInt(leftValue - rightValue);
 
                     } else if (function.equals("mul")) {
                         return new MyInt(leftValue * rightValue);
 
                     } else if (function.equals("div")) {
                         return new MyInt(leftValue / rightValue);
-
-                    }else if (function.equals("set")) {
-                        hm.put(left.function, new MyInt(rightValue));
-                        return new MyInt(rightValue);
+                    } else if (function.equals("print")) {
+                        System.out.println(leftVal.toString());
+                        return leftVal;
+                    } else if (function.equals("mod")) {
+                        return new MyInt(leftValue % rightValue);
+                    } else if (function.equals("set")) {
+                        hm.put(left.function, rightVal);
+                        return rightVal;
+                    } else if (function.equals("join")) {
+                        return new MyString("" + (leftValue + rightValue));
                     }
-                }else if(function.equals("mod")){
-                    int leftValue = leftVal.toInt();
-                    int rightValue = rightVal.toInt();
-                    return new MyInt(leftValue % rightValue);
-                }else if(function.equals("join")){
+
+                }else if (function.equals("print")) {
+                    System.out.println(leftVal.toString());
+                    return leftVal;
+                }else if (function.equals("set")) {
+                    hm.put(left.function, rightVal);
+                    return rightVal;
+                } else if(function.equals("join")){
                     String leftValue = leftVal.toString();
                     String rightValue = rightVal.toString();
                     return new MyString(leftValue + rightValue);
-                }else if (function.equals("print")) {
-                    System.out.println(leftVal.toString());
                 }
             }
             return null;
@@ -132,7 +148,7 @@ public class Labo2Task05 {
         private static HashMap<String, MyVal> hm = new HashMap<>();
     }
 
-    abstract static class MyVal{
+    abstract class MyVal{
         public abstract int toInt();
 
         public abstract String toString();
@@ -151,7 +167,7 @@ public class Labo2Task05 {
         }
     }
 
-    static class MyInt extends MyVal{
+    class MyInt extends MyVal{
         private int v;
         public MyInt(int v){
             this.v = v;
@@ -170,7 +186,7 @@ public class Labo2Task05 {
         }
     }
 
-    static class MyDouble extends MyVal{
+    class MyDouble extends MyVal{
         private double v;
         public MyDouble(double v){
             this.v = v;
@@ -189,7 +205,7 @@ public class Labo2Task05 {
         }
     }
 
-    static class MyString extends MyVal{
+    class MyString extends MyVal{
         private String v;
         public MyString(String v){
             this.v = v;
@@ -208,4 +224,3 @@ public class Labo2Task05 {
         }
     }
 
-}

@@ -1,0 +1,7 @@
+set($d,div(1,2.0))
+set($d,div($d,2.0))
+set($d,div($d,2.0))
+set($d,div($d,2.0))
+set($sout,join("最後の小数は",$d))
+set($sout,join($sout,"です"))
+print($sout,0)
