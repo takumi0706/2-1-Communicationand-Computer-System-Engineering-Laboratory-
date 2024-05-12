@@ -11,7 +11,7 @@ public class Labo2Task05 {
 
 //            ファイルがあるか確認
         try (Scanner scanner_file = new Scanner(new File(fileName))) {
-            Node root = new Node();
+            Node_05 root = new Node_05();
             //            ファイルの中身を取得
             while (scanner_file.hasNextLine()) {
                 String statement = scanner_file.nextLine();
@@ -23,9 +23,9 @@ public class Labo2Task05 {
         }
     }
 }
-    class Node {
-        Node left;
-        Node right;
+    class Node_05 {
+        Node_05 left;
+        Node_05 right;
         String function;
 
         public void makeTree(String statement) {
@@ -54,80 +54,80 @@ public class Labo2Task05 {
                 function = statement.substring(0 ,sindex);
                 function = function.trim();
 
-                left = new Node();
-                right = new Node();
+                left = new Node_05();
+                right = new Node_05();
 
                 left.makeTree(statement.substring(sindex + 1, mindex));
                 right.makeTree(statement.substring(mindex + 1, eindex));
             }
         }
 
-        public MyVal calculate() {
+        public MyVal_05 calculate() {
             if (left == null || right == null) {
                 if (function.startsWith("$")) {
                         return hm.get(function);
                 } else {
-                    return MyVal.readVal(function);
+                    return MyVal_05.readVal(function);
                 }
             }else {
                 if(function.equals("set")){
                     hm.put(left.function,right.calculate());
                     return right.calculate();
                 }
-                MyVal leftVal = left.calculate();
-                MyVal rightVal = right.calculate();
+                MyVal_05 leftVal = left.calculate();
+                MyVal_05 rightVal = right.calculate();
 
-                if (leftVal instanceof MyDouble || rightVal instanceof MyDouble) {
+                if (leftVal instanceof MyDouble_0505 || rightVal instanceof MyDouble_0505) {
                     double leftValue = leftVal.toDouble();
                     double rightValue = rightVal.toDouble();
 
                     if (function.equals("plus")) {
-                        return new MyDouble(leftValue + rightValue);
+                        return new MyDouble_0505(leftValue + rightValue);
 
                     } else if (function.equals("minus")) {
-                        return new MyDouble(leftValue - rightValue);
+                        return new MyDouble_0505(leftValue - rightValue);
 
                     } else if (function.equals("mul")) {
-                        return new MyDouble(leftValue * rightValue);
+                        return new MyDouble_0505(leftValue * rightValue);
 
                     } else if (function.equals("div")) {
-                        return new MyDouble(leftValue / rightValue);
+                        return new MyDouble_0505(leftValue / rightValue);
                     }else if (function.equals("print")) {
                         System.out.println(leftVal.toString());
                         return leftVal;
                     }else if(function.equals("mod")) {
-                        return new MyInt((int)(leftValue % rightValue));
+                        return new MyInt_0505((int)(leftValue % rightValue));
                     }else if(function.equals("set")){
                         hm.put(left.function,rightVal);
                         return rightVal;
                     }else if(function.equals("join")){
-                        return new MyString(""+leftValue + rightValue);
+                        return new MyString_0505(""+leftValue + rightValue);
                     }
-                }else if (leftVal instanceof MyInt && rightVal instanceof MyInt) {
+                }else if (leftVal instanceof MyInt_0505 && rightVal instanceof MyInt_0505) {
                     int leftValue = leftVal.toInt();
                     int rightValue = rightVal.toInt();
 
                     if (function.equals("plus")) {
-                        return new MyInt(leftValue + rightValue);
+                        return new MyInt_0505(leftValue + rightValue);
 
                     } else if (function.equals("minus")) {
-                        return new MyInt(leftValue - rightValue);
+                        return new MyInt_0505(leftValue - rightValue);
 
                     } else if (function.equals("mul")) {
-                        return new MyInt(leftValue * rightValue);
+                        return new MyInt_0505(leftValue * rightValue);
 
                     } else if (function.equals("div")) {
-                        return new MyInt(leftValue / rightValue);
+                        return new MyInt_0505(leftValue / rightValue);
                     } else if (function.equals("print")) {
                         System.out.println(leftVal.toString());
                         return leftVal;
                     } else if (function.equals("mod")) {
-                        return new MyInt(leftValue % rightValue);
+                        return new MyInt_0505(leftValue % rightValue);
                     } else if (function.equals("set")) {
                         hm.put(left.function, rightVal);
                         return rightVal;
                     } else if (function.equals("join")) {
-                        return new MyString("" + (leftValue + rightValue));
+                        return new MyString_0505("" + (leftValue + rightValue));
                     }
 
                 }else if (function.equals("print")) {
@@ -139,37 +139,37 @@ public class Labo2Task05 {
                 } else if(function.equals("join")){
                     String leftValue = leftVal.toString();
                     String rightValue = rightVal.toString();
-                    return new MyString(leftValue + rightValue);
+                    return new MyString_0505(leftValue + rightValue);
                 }
             }
             return null;
         }
 
-        private static HashMap<String, MyVal> hm = new HashMap<>();
+        private static HashMap<String, MyVal_05> hm = new HashMap<>();
     }
 
-    abstract class MyVal{
+    abstract class MyVal_05 {
         public abstract int toInt();
 
         public abstract String toString();
 
         public abstract double toDouble();
 
-        public static MyVal readVal(String str){
+        public static MyVal_05 readVal(String str){
             if(str.contains("\"")){
-                return new MyString(str.replace("\"", ""));
+                return new MyString_0505(str.replace("\"", ""));
             }else if(str.contains(".")){
-                return new MyDouble(Double.parseDouble(str));
+                return new MyDouble_0505(Double.parseDouble(str));
 
             }else{
-                return new MyInt(Integer.parseInt(str));
+                return new MyInt_0505(Integer.parseInt(str));
             }
         }
     }
 
-    class MyInt extends MyVal{
+    class MyInt_0505 extends MyVal_05 {
         private int v;
-        public MyInt(int v){
+        public MyInt_0505(int v){
             this.v = v;
         }
         @Override
@@ -186,9 +186,9 @@ public class Labo2Task05 {
         }
     }
 
-    class MyDouble extends MyVal{
+    class MyDouble_0505 extends MyVal_05 {
         private double v;
-        public MyDouble(double v){
+        public MyDouble_0505(double v){
             this.v = v;
         }
         @Override
@@ -205,9 +205,9 @@ public class Labo2Task05 {
         }
     }
 
-    class MyString extends MyVal{
+    class MyString_0505 extends MyVal_05 {
         private String v;
-        public MyString(String v){
+        public MyString_0505(String v){
             this.v = v;
         }
         @Override
