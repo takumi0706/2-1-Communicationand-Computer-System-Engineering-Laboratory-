@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class Labo2Task07 {
     public static Random rand = new Random();
-    static HashMap<Integer, Color> hm = new HashMap<Integer, Color>();
+    static HashMap<Integer, Color> hm = new HashMap<>();
 
     public static void main(String[] args) {
         var image = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_ARGB);
@@ -91,8 +91,8 @@ class Complex {
     }
 
     public static Complex getComplexAt(int x, int y) {
-        double real = realMin + (realMax - realMin) * x / 999;
         double imag = imagMin + (imagMax - imagMin) * y / 999;
+        double real = realMin + (realMax - realMin) * x / 999;
         return new Complex(real, imag);
     }
 
