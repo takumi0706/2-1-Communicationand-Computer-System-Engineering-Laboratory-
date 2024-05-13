@@ -47,10 +47,10 @@ public class Labo2Task07 {
 }
 
 class Complex {
-    private static final double realMin = -2.1;
-    private static final double realMax = 0.5;
-    private static final double imagMin = -1.3;
-    private static final double imagMax = 1.3;
+    private static final double realMin = -2.9;
+    private static final double realMax = 1.5;
+    private static final double imagMin = -2.3;
+    private static final double imagMax = 2.3;
 
     public double real;
     public double imag;
