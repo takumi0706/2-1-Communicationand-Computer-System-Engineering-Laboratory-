@@ -10,7 +10,7 @@ public class Labo2Task06 {
 
 //            ファイルがあるか確認
         try (Scanner scanner_file = new Scanner(new File(fileName))) {
-            Node_05 root = new Node_05();
+            Node root = new Node();
             //            ファイルの中身を取得
             while (scanner_file.hasNextLine()) {
                 String statement = scanner_file.nextLine();
@@ -73,25 +73,25 @@ class Node {
             MyVal v_right = right.calculate();
 
             if (function.equals("plus")) {
-                if (v_left instanceof MyDouble && v_right instanceof MyDouble) {
+                if (v_left instanceof MyDouble || v_right instanceof MyDouble) {
                     return new MyDouble(v_left.toDouble() + v_right.toDouble());
                 } else {
                     return new MyInt(v_left.toInt() + v_right.toInt());
                 }
             } else if (function.equals("minus")) {
-                if (v_left instanceof MyDouble && v_right instanceof MyDouble) {
+                if (v_left instanceof MyDouble || v_right instanceof MyDouble) {
                     return new MyDouble(v_left.toDouble() - v_right.toDouble());
                 } else {
                     return new MyInt(v_left.toInt() - v_right.toInt());
                 }
             } else if (function.equals("mul")) {
-                if (v_left instanceof MyDouble && v_right instanceof MyDouble) {
+                if (v_left instanceof MyDouble || v_right instanceof MyDouble) {
                     return new MyDouble(v_left.toDouble() * v_right.toDouble());
                 } else {
                     return new MyInt(v_left.toInt() * v_right.toInt());
                 }
             } else if (function.equals("div")) {
-                if (v_left instanceof MyDouble && v_right instanceof MyDouble) {
+                if (v_left instanceof MyDouble || v_right instanceof MyDouble) {
                     return new MyDouble(v_left.toDouble() / v_right.toDouble());
                 } else {
                     return new MyInt(v_left.toInt() / v_right.toInt());
