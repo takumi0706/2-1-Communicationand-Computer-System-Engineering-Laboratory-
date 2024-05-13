@@ -33,16 +33,16 @@ public class Labo2Task07 {
         if(n >= 300){
             return Color.BLACK;
         }else{
-            int r = rand.nextInt(256);
-            int g = rand.nextInt(256);
-            int b = rand.nextInt(256);
+            if(!hm.containsKey(n)) {
+                int r = rand.nextInt(256);
+                int g = rand.nextInt(256);
+                int b = rand.nextInt(256);
 
-            Color c = new Color(r,g,b);
-            hm.put(n, c);
-
-            return hm.get(n);
+                Color c = new Color(r, g, b);
+                hm.put(n, c);
+            }
+                return hm.get(n);
         }
-
     }
 }
 
@@ -91,20 +91,19 @@ class Complex {
     }
 
     public static Complex getComplexAt(int x, int y) {
-        Complex complex = new Complex((x / 1000) * realMax + (1 - (x / 1000)) * realMin, (y / 1000) * imagMax + (1 - (y / 1000)) * imagMin);
-        return complex;
+        double real = realMin + (realMax - realMin) * x / 999;
+        double imag = imagMin + (imagMax - imagMin) * y / 999;
+        return new Complex(real, imag);
     }
 
     public static int mandelCount(Complex c) {
         Complex z = new Complex(0, 0);
-        for(int i = 0; i < 300; i++){
+        for(int i = 1; i < 301; i++){
             z = z.mul(z).plus(c);
             if(z.abs() > 2){
                 return i;
-            }else if(i == 299){
-                return 300;
             }
         }
-        return 0;
+        return 300;
     }
 }
