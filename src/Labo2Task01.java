@@ -14,9 +14,9 @@ public class Labo2Task01 {
         try(Scanner scanner_file = new Scanner(Path.of(FileName),"UTF-8")){
 //            ファイルの中身を一行ずつ読み込む
 //            続くまで取得
+            String line = scanner_file.nextLine();
             while(scanner_file.hasNextLine()){
 //                一行ずつ取得
-                String line = scanner_file.nextLine();
                 String date = scanner_file.next();
                 int amount = scanner_file.nextInt();
 

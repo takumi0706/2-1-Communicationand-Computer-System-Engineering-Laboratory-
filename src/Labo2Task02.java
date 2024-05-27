@@ -18,11 +18,10 @@ public class Labo2Task02 {
         double imag2 = scanner.nextDouble();
         z2 = new complex(real2, imag2);
         System.out.println("Z2 = "+z2);
-
-        System.out.println("Z1 + Z2 = "+z1.plus(z2));
-        System.out.println("Z1 - Z2 = "+z1.minus(z2));
-        System.out.println("Z1 * Z2 = "+z1.mul(z2));
-        System.out.println("Z1 / Z2 = "+z1.div(z2));
+        System.out.println(z1+"+"+z2+"="+z1.plus(z2));
+        System.out.println(z1+"-"+z2+"="+z1.minus(z2));
+        System.out.println(z1+"*"+z2+"="+z1.mul(z2));
+        System.out.println(z1+"/"+z2+"="+z1.div(z2));
 
 
     }
